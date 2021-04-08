@@ -66,8 +66,8 @@ function keyPressed() {
             loser.start(true)
             break;
         case "p":
+            for(var i=0;i<3;i++)
             palline.push(new Pallina)//ogni volta che premiamo "p" aggiunge una nuova pallina
-           
             break;
 
     }
