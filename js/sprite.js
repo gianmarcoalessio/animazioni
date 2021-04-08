@@ -2,13 +2,14 @@ class Sprite {
     constructor(simg, frames, time) {
         this.simg = simg;
         this.frames = frames;
-        this.time = time/this.frames.length;//vogliamo sapere quando tempo è passato per passare da un frame al successivo, per togliere l'istruzione del framerate, in modo tale che la sprite si aggiorn con un tempo suo
+        this.time = time / this.frames.length;//vogliamo sapere quando tempo è passato per passare da un frame al successivo, per togliere l'istruzione del framerate, in modo tale che la sprite si aggiorn con un tempo suo
         this.reset();//cosí il constructor chiama sempre la funzione reset
     }
-    start() {
+    start(continua = false) {
         this.reset();
+        this.continua = continua;
         this.iStart = true;
-        this.date= new Date();//classe interna 
+        this.date = new Date();//classe interna 
     }
     draw(x, y, w, h) {
         //draw della frame
@@ -20,19 +21,18 @@ class Sprite {
     //cambia il contatore quando lo ha appena disegnato
     update() {
         if (this.iStart) {
-            var d=new Date()
-            var timeMillis=d-this.date //mi da quanto tempo è passato da quando ho chiamto date 
-            this.index=Math.floor(timeMillis/this.time)//a che frame si trova in quel momento l'animazione
+            var d = new Date()
+            var timeMillis = d - this.date //mi da quanto tempo è passato da quando ho chiamto date 
+            if (this.continua) {
+                this.index = (Math.floor(timeMillis / this.time)) % this.frames.length
+            } else {
+                this.index = Math.floor(timeMillis / this.time)//a che frame si trova in quel momento l'animazione 
+                if (this.index >= this.frames.length - 1) {
+                    this.index = this.frames.length - 1; //cioè si ferma nell'ultimo frame e non continua in modo continuo perchè il tempo continua sempre, datoc he viene chiamato in un ciclo infinito il draw
+                    this.iStart = false;
 
-            if(this.index>=this.frames.length -1) {
-                this.index=this.frames.length -1; //cioè si ferma nell'ultimo frame e non continua in modo continuo perchè il tempo continua sempre, datoc he viene chiamato in un ciclo infinito il draw
-                this.iStart=false;
+                }
             }
-            /*if (this.index < (this.frames.length - 1)){
-                 this.index++;
-            }else{
-                this.iStart=false;
-            }*/
         }
     }
     reset() {
