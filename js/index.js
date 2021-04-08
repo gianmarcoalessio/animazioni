@@ -1,8 +1,9 @@
+var simg;
+
 var o = {
     CW: 0,
     CH: 0,
 }
-
 function init() {
     o.CW = windowWidth;
     o.CH = windowHeight;
@@ -17,10 +18,8 @@ function setup() {
 }
 function draw() {
     background("whitesmoke");
+    simg.draw(0,10,10,200,200);
 }
-/*function preload() {
-    o.sprite = loadImage("./img/pedine.png", (img) => {
-        o.spritex = img.width / 8;
-        o.spritey = img.height / 4;
-    })
-}*/
+function preload(){
+    simg=new Spriteimg("./img/pedine.png",4,8)
+}

@@ -1,5 +1,7 @@
 class Sprite {
-    constructor(){
-        
+    constructor(simg,frames,time){
+        this.simg=simg;
+        this.frames=frames;
+        this.time=time;
     }
 }
