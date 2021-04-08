@@ -24,6 +24,10 @@ function setup() {
 }
 function draw() {
     background("whitesmoke");
+    fill(0);
+    textSize(40);
+    textAlign(CENTER);
+    text(`${Math.floor(frameRate())} - ${palline.length}`,o.CW/2,o.CH/2);
     //spriteBW.draw(10, 10, 100, 100);
     //spriteWB.draw(10, 150, 100, 100);
     //loser.draw(150,10,1000,1000)
@@ -47,6 +51,7 @@ function preload() {
 function keyPressed() {
     switch (key) {
         case "r":
+            palline=[];
             spriteBW.reset();
             spriteWB.reset();
             loser.reset();
@@ -62,6 +67,7 @@ function keyPressed() {
             break;
         case "p":
             palline.push(new Pallina)//ogni volta che premiamo "p" aggiunge una nuova pallina
+           
             break;
 
     }
