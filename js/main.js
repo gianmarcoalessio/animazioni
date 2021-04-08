@@ -3,6 +3,7 @@ var spriteBW;//sprite da black a white
 var spriteWB;//sprite da white a black
 
 var loser
+var palline=[];//vettore dei frame della pallina che simula che si sposta 
 
 var o = {
     CW: 0,
@@ -22,10 +23,17 @@ function setup() {
 }
 function draw() {
     background("whitesmoke");
-    //simg.draw(0,10,10,200,200);
-    spriteBW.draw(10, 10, 100, 100);
-    spriteWB.draw(10, 150, 100, 100);
-    loser.draw(150,10,1000,1000)
+    //spriteBW.draw(10, 10, 100, 100);
+    //spriteWB.draw(10, 150, 100, 100);
+    //loser.draw(150,10,1000,1000)
+
+    for (var p of palline){
+        p.draw()
+        p.update()
+    }
+    palline=palline.filter(p=>{
+        return p.x<o.CW
+    })//fa un filtro eliminando tutte le palline che superano i valori di x per pallina maggiori di CW
 }
 function preload() {
     simg = new Spriteimg("./img/pedine.png", 4, 8)
@@ -50,6 +58,9 @@ function keyPressed() {
             spriteBW.start(true);
             spriteWB.start(true);
             loser.start(true)
+            break;
+        case "p":
+            palline.push(new Pallina)//ogni volta che premiamo "p" aggiunge una nuova pallina
             break;
 
     }
