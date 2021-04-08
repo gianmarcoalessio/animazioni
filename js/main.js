@@ -31,9 +31,9 @@ function draw() {
         p.draw()
         p.update()
     }
-    palline=palline.filter(p=>{
+    /*palline=palline.filter(p=>{
         return p.x<o.CW
-    })//fa un filtro eliminando tutte le palline che superano i valori di x per pallina maggiori di CW
+    })*///fa un filtro eliminando tutte le palline che superano i valori di x per pallina maggiori di CW
 }
 function preload() {
     simg = new Spriteimg("./img/pedine.png", 4, 8)
