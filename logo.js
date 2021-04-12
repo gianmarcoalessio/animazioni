@@ -15,17 +15,6 @@ function preload() {
 
 function setup(){
     createCanvas(CW*4,CH).parent("canvas");
-}
-function doshape(){ 
-    var k=w*au*au;
-    beginShape()
-    vertex(-k,-k);
-    vertex(0,0);
-    vertex(k,-k);
-    endShape()
-
-    pg = createGraphics(CW,CH);
-
     var ix=CW*4
     img = createImage(ix, ix);
     img.loadPixels();
@@ -40,10 +29,19 @@ function doshape(){
         }
     }
     img.updatePixels();
-     
-    
-
 }
+
+function doshape(d){ 
+    push() 
+    translate(0,-d);
+    var k=w*au*au;
+    beginShape()
+    vertex(-k,-k);
+    vertex(0,0);
+    vertex(k,-k);
+    endShape()
+    pop();
+}   
 
 
 
@@ -57,29 +55,16 @@ function draw(){
     strokeJoin(ROUND)
     strokeWeight(w)
     push();
-    translate(CW/2,CH/2-d);
-    doshape();
+        translate(CW/2,CH/2);
+        doshape(d);
+        rotate(PI/2);
+        doshape(d);
+        rotate(PI/2);
+        doshape(d);
+        rotate(PI/2);
+        doshape(d);
     pop();
-   
-    push();
-    translate(CW/2+d,CH/2);
-    rotate(PI/2);
-    doshape();
-    pop();
-
-    push();
-    translate(CW/2,CH/2+d);
-    rotate(PI);
-    doshape();
-    pop();
-
-    push();
-    translate(CW/2-d,CH/2);
-    rotate(-PI/2);
-    doshape();
-    pop();
-    noStroke()
-    fill(128);
+    
     image(img,0,0,CW,CW);
     
     noFill()
@@ -97,7 +82,6 @@ function draw(){
     rect(CW,0,CW*3,CH);
     fill(0)
     textFont(mfont);
-    //textSize(110);
     textSize(110);
     push()
     translate(CW+w/2,CH/2+w*3)
